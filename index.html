@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FC모바일 선수 특성 정보</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="Favicon.png"/>
 </head>
 <body>
     <h1 id="heading">FC모바일 선수 특성 정보</h1>
@@ -25,5 +26,84 @@
 
     <h4 id="info3">해리지팡이, 크리티칼</h4>
     <h4 id="info4">일부 정보 출처: 모피투</h4>
+    <script>
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+          navigator.serviceWorker.register('/sw.js')
+          .then(function(swReg) {
+            console.log('Service Worker is registered', swReg);
+    
+            return swReg.pushManager.getSubscription()
+            .then(function(subscription) {
+              if (subscription === null) {
+                return swReg.pushManager.subscribe({
+                  userVisibleOnly: true,
+                  applicationServerKey: urlB64ToUint8Array('BBSGXZN75_LHd1luWhNeXfSIgksvros8Sw5YUqvKuDn1tqRgF_WGKL4_4cW37UQ3VDofHBx5pgxsHm5xvv5NgZ4')
+                });
+              } else {
+                return subscription;
+              }
+            });
+          })
+          .then(function(subscription) {
+            console.log('User is subscribed:', subscription);
+            scheduleDailyNotification(subscription);
+          })
+          .catch(function(error) {
+            console.error('Service Worker Error', error);
+          });
+        }
+    
+        function urlB64ToUint8Array(base64String) {
+          const padding = '='.repeat((4 - base64String.length % 4) % 4);
+          const base64 = (base64String + padding)
+            .replace(/\-/g, '+')
+            .replace(/_/g, '/');
+          
+          const rawData = window.atob(base64);
+          const outputArray = new Uint8Array(rawData.length);
+          
+          for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+          }
+          return outputArray;
+        }
+    
+        function scheduleDailyNotification(subscription) {
+          function calculateTimeout() {
+            const now = new Date();
+            const target = new Date();
+            target.setHours(20, 15, 0, 0); // 8:10 AM
+    
+            if (now > target) {
+              target.setDate(target.getDate() + 1); // 다음 날로 설정
+            }
+    
+            return target - now;
+          }
+    
+          function sendNotification() {
+            const payload = JSON.stringify({
+              title: 'FC모바일 특성 정보!',
+              body: '필요한 특성이 있으신가요? 특성을 달아주세요!',
+              icon: 'Favicon.png',
+            
+            });
+    
+            navigator.serviceWorker.ready.then(function(swRegistration) {
+              swRegistration.showNotification('FC모바일 특성 정보!', {
+                body: '필요한 특성이 있으신가요? 특성을 달아주세요!',
+                icon: 'Favicon.png',
+                
+              });
+            });
+    
+            // 다음 날 알림 설정
+            setTimeout(sendNotification, 24 * 60 * 60 * 1000); // 24시간 후 다시 실행
+          }
+    
+          // 초기 타이머 설정
+          setTimeout(sendNotification, calculateTimeout());
+        }
+      </script>
 </body>
 </html>
