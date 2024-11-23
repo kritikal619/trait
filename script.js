@@ -287,6 +287,7 @@ const data = [
    
 ];
 
+
 data.forEach(rowData => {
     const row = document.createElement('tr');
     rowData.forEach(cellData => {
