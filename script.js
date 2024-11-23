@@ -367,5 +367,3 @@ function setupPagination(totalItems, currentPage) {
 // 초기 페이지 로딩
 displayPage(currentPage);
 
-// 초기 페이지 로딩
-displayPage(currentPage);
