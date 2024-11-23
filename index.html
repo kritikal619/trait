@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="FC모바일 특성 재료 관련 정보를 제공하는 FCTrait 사이트입니다.">
+    <meta name="keywords" content="FC모바일, 특성 재료, 선수 특성, 오버롤, FC Trait, 넥슨, 게임 정보">
+    <meta name="author" content="FCTrait Team">
+    <meta property="og:title" content="FC모바일 특성 재료 정보">
+    <meta property="og:description" content="FC모바일 특성 재료와 관련된 모든 정보를 제공합니다!">
+    <meta property="og:image" content="Favicon.png">
+    <meta property="og:url" content="https://fctrait.kro.kr">
     <title>FC모바일 특성 재료 정보</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="Favicon.png"/>
@@ -15,23 +22,20 @@
     <h4 id="info2">검색 시 올바른 명칭을 사용해 주세요 (강뚝 X 강력한 헤더 O)</h4>
  
     <A href="http://fcevol.kro.kr/"> 추가 정보: 진화 시뮬레이션을 하고 싶다면? </A>
- <P>
+    <p>
     <A href="https://indvel.github.io/fcmsquad/"> 스쿼드메이커를 사용하고 싶다면? </A>
-    <P>
+    <p>
 
     <div id="search-container">
         <input type="text" id="search-input" placeholder="선수, 오버롤, 시즌, 특성명 검색" onkeyup="filterTable()">
     </div>
     <div id="table-container">
-        
+        <!-- JavaScript로 동적 데이터 추가 -->
     </div>
-    <div id="pagination">
-        
-    </div>
-    <script src="script.js"></script>
-
+    <div id="pagination"></div>
     <h4 id="info3">해리지팡이, 크리티칼</h4>
     <h4 id="info4">Data based on NEXON</h4>
+
     <script>
         if ('serviceWorker' in navigator && 'PushManager' in window) {
           navigator.serviceWorker.register('/sw.js')
@@ -112,13 +116,13 @@
         }
       </script>
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "FC모바일 특성 재료",
-  "description": "FC모바일 특성 재료 관련 정보를 제공하는 FCTrait 사이트입니다.",
-  "url": "https://fctrait.kro.kr"
-}
-</script>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "FC모바일 특성 재료",
+      "description": "FC모바일 특성 재료 관련 정보를 제공하는 FCTrait 사이트입니다.",
+      "url": "https://fctrait.kro.kr"
+    }
+    </script>
 </body>
 </html>
