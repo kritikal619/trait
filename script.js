@@ -307,35 +307,37 @@ window.enterkeySearch = () => {
 };
 
 
+let currentPage = 1;
+const rowsPerPage = 30; // 페이지당 표시할 데이터 수
+
+// 전체 데이터를 저장
+const data = []; // 데이터를 여기에 로드하거나 fetch로 가져옵니다.
+
+// 검색 및 필터링 후 데이터 업데이트
 function filterTable() {
     const searchInput = document.getElementById('search-input');
     const searchTerm = searchInput.value.toLowerCase();
-    const rows = tbody.querySelectorAll('tr');
-    
-    rows.forEach(row => {
-        const cells = row.querySelectorAll('td');
-        const cellText = Array.from(cells).map(cell => cell.textContent.toLowerCase());
-        // 검색어가 셀 텍스트에 포함되는지 확인합니다.
-        const matchesSearchTerm = cellText.some(text => text.includes(searchTerm));
-        row.style.display = matchesSearchTerm ? "" : "none"; // 일치하면 표시, 아니면 숨깁니다.
-    });
+
+    // 검색된 데이터 필터링
+    const filteredData = data.filter(row =>
+        row.some(cell => cell.toString().toLowerCase().includes(searchTerm))
+    );
+
+    // 검색된 데이터를 기준으로 페이지네이션 표시
+    displayPage(1, filteredData);
 }
-// 페이지당 표시할 데이터 수
-const rowsPerPage = 30;
 
-// 현재 페이지 번호
-let currentPage = 1;
-
-function displayPage(page) {
-    // 시작 인덱스
+function displayPage(page, filteredData = data) {
     const start = (page - 1) * rowsPerPage;
-    // 종료 인덱스
     const end = page * rowsPerPage;
-    // 현재 페이지의 데이터 추출
-    const paginatedItems = data.slice(start, end);
 
-    // 테이블 본문 클리어
-    tbody.innerHTML = '';
+    // 현재 페이지 데이터 추출
+    const paginatedItems = filteredData.slice(start, end);
+
+    const tbody = document.querySelector('#table-container tbody');
+    if (!tbody) return;
+
+    tbody.innerHTML = ''; // 기존 데이터 초기화
 
     // 현재 페이지 데이터로 테이블 본문 채우기
     paginatedItems.forEach(item => {
@@ -347,13 +349,13 @@ function displayPage(page) {
     });
 
     // 페이지네이션 버튼 업데이트
-    setupPagination(data.length, page);
+    setupPagination(filteredData.length, page);
 }
 
 function setupPagination(totalItems, currentPage) {
     const pageCount = Math.ceil(totalItems / rowsPerPage);
     const paginationContainer = document.getElementById('pagination');
-    paginationContainer.innerHTML = ''; // 기존 페이지네이션 버튼 제거
+    paginationContainer.innerHTML = ''; // 기존 페이지네이션 초기화
 
     for (let i = 1; i <= pageCount; i++) {
         const btn = document.createElement('button');
@@ -364,5 +366,17 @@ function setupPagination(totalItems, currentPage) {
     }
 }
 
-// 초기 페이지 로딩
-displayPage(currentPage);
+// 초기 데이터 로드 및 첫 페이지 표시
+document.addEventListener('DOMContentLoaded', () => {
+    const tbody = document.createElement('tbody');
+    document.getElementById('table-container').appendChild(tbody);
+
+    // 데이터를 로드한 후 초기 페이지 표시
+    displayPage(1);
+
+    // 검색 입력에 필터 적용
+    document.getElementById('search-input').addEventListener('keyup', filterTable);
+});
+
+}
+}
