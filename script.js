@@ -1,11 +1,11 @@
 const container = document.getElementById('table-container');
 
-// 테이블 요소를 생성합니다.
+// 테이블 요소 생성
 const table = document.createElement('table');
 table.style.width = '100%';
 table.setAttribute('border', '1');
 
-// 테이블의 헤더를 생성합니다.
+// 테이블의 헤더 생성
 const thead = document.createElement('thead');
 const headerRow = document.createElement('tr');
 const headers = ['선수', '오버롤', '시즌', '특성'];
@@ -17,8 +17,11 @@ headers.forEach(headerText => {
 thead.appendChild(headerRow);
 table.appendChild(thead);
 
-// 테이블의 본문을 생성합니다.
+// 테이블 본문 생성
 const tbody = document.createElement('tbody');
+table.appendChild(tbody);
+
+// 데이터를 넣을 배열
 const data = [
     ['마르코 아센시오', '118', 'PSG24', '얼리 크로스 선호'],
     ['헤수스 나바스', '118', '24TOTY', '얼리 크로스 선호'],
@@ -284,56 +287,37 @@ const data = [
     ['E. 마르티네스', '129', 'COPA24', 'GK 멀리 던지기'],
     ['알리송', '130', '24TOTY', 'GK 멀리 던지기'],
     ['마이크 메냥', '131', 'EURO24', 'GK 멀리 던지기'],
-   
+    // 더 많은 데이터를 추가하세요
 ];
 
+let filteredData = [...data]; // 필터링된 데이터를 저장할 배열
 
-data.forEach(rowData => {
-    const row = document.createElement('tr');
-    rowData.forEach(cellData => {
-        const cell = document.createElement('td');
-        cell.textContent = cellData;
-        row.appendChild(cell);
-    });
-    tbody.appendChild(row);
-});
-table.appendChild(tbody);
-
-// 최종적으로 생성한 테이블을 container div에 추가합니다.
-container.appendChild(table);
-window.enterkeySearch = () => {
-    if (window.event.keyCode == 13) {
-        searchPost();
-    }
-};
-
+const rowsPerPage = 30; // 한 페이지에 표시할 데이터 수
+let currentPage = 1; // 현재 페이지
 
 function filterTable() {
     const searchInput = document.getElementById('search-input');
     const searchTerm = searchInput.value.toLowerCase();
-    const rows = tbody.querySelectorAll('tr');
-    
-    rows.forEach(row => {
-        const cells = row.querySelectorAll('td');
-        const cellText = Array.from(cells).map(cell => cell.textContent.toLowerCase());
-        // 검색어가 셀 텍스트에 포함되는지 확인합니다.
-        const matchesSearchTerm = cellText.some(text => text.includes(searchTerm));
-        row.style.display = matchesSearchTerm ? "" : "none"; // 일치하면 표시, 아니면 숨깁니다.
-    });
-}
-// 페이지당 표시할 데이터 수
-const rowsPerPage = 30;
 
-// 현재 페이지 번호
-let currentPage = 1;
+    // 검색어로 데이터 필터링
+    filteredData = data.filter(row => {
+        return row.some(cell => cell.toLowerCase().includes(searchTerm));
+    });
+
+    // 필터링된 데이터를 기준으로 첫 페이지 표시
+    displayPage(1);
+}
 
 function displayPage(page) {
+    currentPage = page; // 현재 페이지 업데이트
+
     // 시작 인덱스
     const start = (page - 1) * rowsPerPage;
     // 종료 인덱스
     const end = page * rowsPerPage;
+
     // 현재 페이지의 데이터 추출
-    const paginatedItems = data.slice(start, end);
+    const paginatedItems = filteredData.slice(start, end);
 
     // 테이블 본문 클리어
     tbody.innerHTML = '';
@@ -348,7 +332,7 @@ function displayPage(page) {
     });
 
     // 페이지네이션 버튼 업데이트
-    setupPagination(data.length, page);
+    setupPagination(filteredData.length, page);
 }
 
 function setupPagination(totalItems, currentPage) {
@@ -365,5 +349,12 @@ function setupPagination(totalItems, currentPage) {
     }
 }
 
+// 검색 이벤트 리스너 추가
+document.getElementById('search-input').addEventListener('input', filterTable);
+
 // 초기 페이지 로딩
 displayPage(currentPage);
+
+// 테이블을 컨테이너에 추가
+container.appendChild(table);
+
