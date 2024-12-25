@@ -41,7 +41,7 @@
 
     <script>
         if ('serviceWorker' in navigator && 'PushManager' in window) {
-          navigator.serviceWorker.register('/sw.js')
+          navigator.serviceWorker.register('./sw.js')
           .then(function(swReg) {
             console.log('Service Worker is registered', swReg);
     
@@ -118,14 +118,5 @@
           setTimeout(sendNotification, calculateTimeout());
         }
       </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://kritikal619.github.io/trait",
-      "@type": "WebPage",
-      "name": "FC모바일 특성 재료",
-      "description": "FC모바일 특성 재료 관련 정보를 제공하는 FCTrait 사이트입니다.",
-      "url": "https://kritikal619.github.io/trait"
-    }
-    </script>
 </body>
 </html>
