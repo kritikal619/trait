@@ -123,6 +123,7 @@ body {
   margin-top: 20px; /* 테이블과의 상단 여백 */
 }
 
+
 /* 페이지네이션 버튼 기본 스타일 */
 #pagination button {
   padding: 5px 10px; /* 패딩 */
@@ -142,4 +143,105 @@ body {
 /* 현재 페이지를 나타내는 버튼 스타일 */
 #pagination .active {
   background-color: #a39485; /* 활성 페이지 버튼 색상 */
+}
+
+/*html, body{
+  margin: 0;
+  padding:0;
+}*/
+
+
+#wrap {
+  display: block; /* 기본 블록 레이아웃 */
+  background-color: #f2f2f2;
+}
+
+footer {
+  width: 100%;
+  height: 90px;
+  border-top: 1px solid #c4c4c4;
+  padding-top: 15px;
+  color: #808080;
+  font-size: 11px;
+  background-color: #f2f2f2;
+}
+footer a {
+  display: inline-block;
+  margin: 0 20px 10px 20px;
+  color: #808080; font-size: 11px;
+}
+
+footer a:visited {
+  color: #808080
+}
+
+footer p {
+  margin-top: 0; margin-bottom: 0;
+}
+
+footer p span {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+#copy-button {
+  margin-left: 10px; /* 이메일과 버튼 사이 간격 */
+  padding: 5px 10px;
+  background-color: #73685d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+#copy-button:hover {
+  background-color: #5a5147; /* 호버 시 색상 변경 */
+}
+
+#question {
+  color:#777676
+}
+
+.modal {
+  display: none; /* 기본적으로 숨김 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 80%
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+#confirm {
+  margin-left: 10px; 
+  padding: 5px 10px;
+  background-color: #73685d;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 13px;
+  width: 90%;
 }
