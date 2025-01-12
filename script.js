@@ -267,6 +267,24 @@ const data = [
     ['파울로 말디니', '130', 'CT24', '두번째 활력'],
     ['J. 벨링엄', '130', '24TOTY', '두번째 활력'],
     ['A. 도브비크', '130', '24TOTS', '두번째 활력'],
+    ['페르난도 이에로','120','IF23','주발 선호'],
+    ['F. 아르마니','120','CT24','주발 선호'],
+    ['마르코 반힝켈','121','CT24','주발 선호'],
+    ['니쿠쇼르 반쿠','121','EURO24','주발 선호'],
+    ['아단','122','CT24','주발 선호'],
+    ['H. 몰도반','122','EURO24','주발 선호'],
+    ['니코 엘베디','123','CT24','주발 선호'],
+    ['페르민 로페즈','123','EURO24','주발 선호'],
+    ['페란 토레스','124','CT24','주발 선호'],
+    ['K. 요시노','124','KL24','주발 선호'],
+    ['알 오와이란','125','UH24','주발 선호'],
+    ['사비우','125','24TOTS','주발 선호'],
+    ['마누엘 아칸지','126','CT24','주발 선호'],
+    ['페르난도 이에로','126','HT24','주발 선호'],
+    ['헨릭 라르손','127','HT24','주발 선호'],
+    ['프랑코 바레시','128','CT24','주발 선호'],
+    ['이을용','129','KL24','주발 선호'],
+    ['페터 슈마이켈','130','ENI24','주발 선호'],
     ['다비드 소리아', '120', 'CT24', 'GK 멀리 던지기'],
     ['니크 올리이', '120', 'CT24', 'GK 멀리 던지기'],
     ['마테우스', '121', 'CT24', 'GK 멀리 던지기'],
@@ -358,3 +376,87 @@ displayPage(currentPage);
 // 테이블을 컨테이너에 추가
 container.appendChild(table);
 
+document.getElementById('copy-button').addEventListener('click', function() {
+    // 이메일 텍스트 가져오기
+    const emailText = document.getElementById('email').textContent;
+
+    // 임시 텍스트 입력 요소 생성
+    const tempInput = document.createElement('input');
+    tempInput.value = emailText;
+    document.body.appendChild(tempInput);
+
+    // 텍스트 선택 및 복사
+    tempInput.select();
+    document.execCommand('copy');
+
+    // 임시 입력 요소 삭제
+    document.body.removeChild(tempInput);
+
+    // 알림 메시지 출력
+    alert('이메일이 복사되었습니다: ' + emailText);
+  });
+ 
+  async function getIPAddress() {
+    try {
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      return data.ip;
+    } catch (error) {
+      console.error('IP 주소를 가져오는 중 오류 발생:', error);
+      return null;
+    }
+  }
+
+  // 첫 방문 여부 확인 (기존 기능)
+  async function checkFirstVisit() {
+    const ipAddress = await getIPAddress();
+
+    if (!ipAddress) {
+      console.error('IP 주소를 확인할 수 없습니다.');
+      return;
+    }
+
+    const visitedIPs = JSON.parse(localStorage.getItem('visitedIPs')) || [];
+
+    if (!visitedIPs.includes(ipAddress)) {
+      showModal();
+      visitedIPs.push(ipAddress);
+      localStorage.setItem('visitedIPs', JSON.stringify(visitedIPs));
+    }
+  }
+
+  // 모달 표시 함수
+  function showModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'flex'; // 모달 표시
+
+    // 닫기 버튼 이벤트
+    document.getElementById('confirm').addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+    document.getElementById('close-modal').addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+    // 모달 외부 클릭 시 닫기
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  }
+
+  // 콘솔 명령어 감지
+  (function detectConsoleCommand() {
+    const originalLog = console.log;
+
+    // 콘솔에서 `develop` 명령어를 입력하면 모달 표시
+    console.log = function (...args) {
+      if (args[0] === 'develop') {
+        showModal(); // 모달 표시
+      }
+      originalLog.apply(console, args);
+    };
+  })();
+
+  // 페이지 로드 시 실행
+  checkFirstVisit();
