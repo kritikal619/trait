@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
-    <meta name="description" content="FC모바일 특성 재료 오버롤별 정리! 예리한 감아차기, 라인 브레이커, 패스 마스터, 중거리 슛 선호, 화려한 패스, 두번째 활력, 강력한 헤더, 예감, 패마, 라브, 강뚝, 두활, 군중 선호."> <!--진짜-->
+    <meta name="description" content="FC모바일 특성 재료 오버롤별 정리! 예리한 감아차기, 라인 브레이커, 패스 마스터, 중거리 슛 선호, 화려한 패스, 두번째 활력, 강력한 헤더, 예감, 패마, 라브, 강뚝, 두활, 군중 선호, 예리한 감아차기 선수, 라인 브레이커 선수, 패스 마스터 선수, 중거리 슛 선호 선수, 화려한 패스 선수, 두번째 활력 선수, 강력한 헤더 선수, 예감 선수, 패마 선수, 라브 선수, 강뚝 선수, 두활 선수, 군중 선호 선수."> <!--진짜-->
     <meta name="keywords" content="FC모바일, 특성 재료, 선수 특성, 오버롤, FC Trait, 넥슨, 게임 정보, 라브, 피파모바일, 피모, 엪모, 특성, 라인 브레이커, 예감, 예리한 감아차기, 패마, 패스 마스터, 두활, 두번째 활력, 강뚝, 강력한 헤더, 선수">
     <meta name="author" content="해리지팡이">
     <meta property="title" content="FC모바일 특성 재료 정보">
@@ -27,7 +27,7 @@
 </head>
 <body>
     <h1 id="heading">FC모바일 특성 재료 정보</h1>
-    <h4 id="update">최근 업데이트 24.12.25 (버그 수정)</h4>
+    <h4 id="update">최근 업데이트 25.01.12 (푸터 수정, 문의 버튼 추가, 특성 재료 선수 추가, 팝업창 추가)</h4>
     <h4 id="info">공지: 검색 시 올바른 명칭을 사용해 주세요 (강뚝 X 강력한 헤더 O)</h4>
     <h4 id="info2"></h4>
  
@@ -40,16 +40,39 @@
     <div id="table-container">
         <!-- JavaScript로 동적 데이터 추가 -->
     </div>
-    <div id="pagination"></div>
+    <div id="question">
+      <br>
+      <span>원하는 특성이 없나요? <button id="copy-button">개발자에게 문의하기</button></span>
     </div>
-    <script src="script.js"></script>
-    <h4 id="info3">해리지팡이, 크리티칼</h4>
-    <h4 id="info4">Data based on NEXON</h4>
-    <footer>
-        <p>이메일 주소: <span id="email" onclick="copyEmail()" style="cursor: pointer; color: blue; text-decoration: underline;">jchae0619@gmail.com</span></p>
-        <span>이메일 주소 클릭해서 복사</span><br/>
-    </footer>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" id="close-modal">&times;</span>
+        <h3>공지사항</h3>
+        <p>검색 시 올바른 명칭을 사용해 주세요 (강뚝 X 강력한 헤더 O) <br>
+          최근 업데이트 25.01.12 (푸터 수정, 문의 버튼 추가, 특성(주발 선호)재료 선수 추가, 팝업창 추가)
+        </p>
+        <button id="confirm">확인</button>
+      </div>
+    </div>
+    <div id="pagination"></div>
+    <br>
+    <br>
+    <div id="wrap">
+      <section>
+      </section>
+      <footer>
+       <p>
+        <span>Data based on NEXON</span><br/>
+        <span>이메일 :<span id="email">jchae0619@gmail.com</span></span>
+        <button id="copy-button">복사</button><br/>
 
+        <span>© 2025 kritikal619. All Rights Reserved.</span>
+       </p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+    
     <script>
         if ('serviceWorker' in navigator && 'PushManager' in window) {
           navigator.serviceWorker.register('./sw.js')
