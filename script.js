@@ -416,14 +416,22 @@ document.getElementById('copy-button').addEventListener('click', function() {
       return;
     }
 
-    const visitedIPs = JSON.parse(localStorage.getItem('visitedIPs')) || [];
+    const today = new Date().toDateString(); // 오늘 날짜 문자열 (yyyy-mm-dd 형식)
+  const lastVisitData = JSON.parse(localStorage.getItem('lastVisit')) || { date: null, ips: [] };
 
-    if (!visitedIPs.includes(ipAddress)) {
-      showModal();
-      visitedIPs.push(ipAddress);
-      localStorage.setItem('visitedIPs', JSON.stringify(visitedIPs));
-    }
+   if (lastVisitData.date !== today) {
+    // 날짜가 다르면 초기화
+    lastVisitData.date = today;
+    lastVisitData.ips = [];
   }
+
+  if (!lastVisitData.ips.includes(ipAddress)) {
+    showModal();
+    lastVisitData.ips.push(ipAddress);
+  }
+
+  localStorage.setItem('lastVisit', JSON.stringify(lastVisitData));
+}
 
   // 모달 표시 함수
   function showModal() {
