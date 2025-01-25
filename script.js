@@ -445,18 +445,7 @@ document.getElementById('copy-button').addEventListener('click', function() {
     });
   }
 
-  // 콘솔 명령어 감지
-  (function detectConsoleCommand() {
-    const originalLog = console.log;
-
-    // 콘솔에서 `develop` 명령어를 입력하면 모달 표시
-    console.log = function (...args) {
-      if (args[0] === 'develop') {
-        showModal(); // 모달 표시
-      }
-      originalLog.apply(console, args);
-    };
-  })();
+  
 
   // 페이지 로드 시 실행
   checkFirstVisit();
