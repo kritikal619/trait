@@ -10,7 +10,7 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  
+  ,
     {
       "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
