@@ -1,3 +1,4 @@
+//푸시
 self.addEventListener('push', function(event) {
     const data = event.data.json();
     const options = {
@@ -10,3 +11,5 @@ self.addEventListener('push', function(event) {
     );
   });
   
+  //웹앱 https://fe-developers.kakaoent.com/2023/230202-a2hs/
+  self.addEventListener("fetch", e => {});
