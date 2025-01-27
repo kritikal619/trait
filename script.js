@@ -458,3 +458,42 @@ document.getElementById('copy-button').addEventListener('click', function() {
   // 페이지 로드 시 실행
   checkFirstVisit();
 
+  
+  
+  
+  let deferredPrompt; // 이벤트 객체 저장
+
+  // beforeinstallprompt 이벤트 캐치
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault(); // 기본 동작 방지
+    deferredPrompt = event; // 이벤트 객체 저장
+  
+    // 팝업 표시
+    const installPrompt = document.getElementById("installPrompt");
+    installPrompt.style.display = "block";
+  });
+  
+  // "추가하기" 버튼 클릭 시
+  document.getElementById("installConfirm").addEventListener("click", async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt(); // 설치 UI 표시
+      const choiceResult = await deferredPrompt.userChoice;
+  
+      if (choiceResult.outcome === "accepted") {
+        console.log("사용자가 설치를 수락했습니다.");
+      } else {
+        console.log("사용자가 설치를 거부했습니다.");
+      }
+      deferredPrompt = null; // 초기화
+    }
+  
+    // 팝업 숨기기
+    document.getElementById("installPrompt").style.display = "none";
+  });
+  
+  // "취소" 버튼 클릭 시
+  document.getElementById("installCancel").addEventListener("click", () => {
+    // 팝업 숨기기
+    document.getElementById("installPrompt").style.display = "none";
+  });
+  
