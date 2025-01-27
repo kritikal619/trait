@@ -29,6 +29,7 @@
     {
       "src": "./screenshots/screenshot2.png",
       "sizes": "1280x720",
+      "form_factor": "wide",
       "type": "image/png"
     }
   ]
