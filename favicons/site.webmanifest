@@ -1,7 +1,7 @@
 {
   "name": "FC모바일 특성",
   "short_name": "피모 특성",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
   "scope": "/",
   "icons": [
     {
