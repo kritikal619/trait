@@ -25,7 +25,7 @@
       "src": "./screenshots/screenshot3.png",
       "sizes": "4032x3024",
       "type": "image/png"
-      "purpose": "any"
+      "purpose": "maskable"
     },
     {
       "src": "./screenshots/screenshot3.png",
