@@ -23,13 +23,13 @@
   "screenshots": [
     {
       "src": "./screenshots/screenshot3.png",
-      "sizes": "640x480",
+      "sizes": "4032x3024",
       "type": "image/png"
       "purpose": "any"
     },
     {
       "src": "./screenshots/screenshot3.png",
-      "sizes": "1280x720",
+      "sizes": "4032x3024",
       "form_factor": "wide",
       "type": "image/png"
       "purpose": "maskable"
