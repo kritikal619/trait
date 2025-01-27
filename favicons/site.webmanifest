@@ -22,14 +22,14 @@
   ],
   "screenshots": [
     {
-      "src": "./screenshots/screenshot3.png",
-      "sizes": "4032x3024",
+      "src": "./screenshots/screenshot1.png",
+      "sizes": "640x480",
       "type": "image/png"
-      "purpose": "maskable"
+      "purpose": "any"
     },
     {
-      "src": "./screenshots/screenshot3.png",
-      "sizes": "4032x3024",
+      "src": "./screenshots/screenshot2.png",
+      "sizes": "1280x720",
       "form_factor": "wide",
       "type": "image/png"
       "purpose": "maskable"
