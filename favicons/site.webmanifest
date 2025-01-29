@@ -24,15 +24,15 @@
     {
       "src": "screenshots/screenshot1.png",
       "sizes": "640x480",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
+  
     },
     {
       "src": "screenshots/screenshot2.png",
       "sizes": "1280x720",
       "form_factor": "wide",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
+   
     }
   ]
 }
