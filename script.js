@@ -496,4 +496,64 @@ document.getElementById('copy-button').addEventListener('click', function() {
     // 팝업 숨기기
     document.getElementById("installPrompt").style.display = "none";
   });
-  
+
+
+//othernames
+let otherNamesData = {}; // otherNames 데이터를 저장할 변수
+
+// JSON 파일에서 특성의 otherNames 불러오기
+async function loadOtherNames() {
+    try {
+        const response = await fetch('otherNames.json');
+        otherNamesData = await response.json();
+        console.log("📄 otherNames.json 데이터 불러옴:", otherNamesData);
+        displayTable(data); // 테이블 다시 로드
+    } catch (error) {
+        console.error("❌ otherNames.json 로드 실패:", error);
+    }
+}
+
+// 테이블 본문 생성
+const t_body = document.createElement('tbody');
+table.appendChild(tbody);
+
+function displayTable(dataArray) {
+    tbody.innerHTML = ''; // 기존 데이터 초기화
+
+    dataArray.forEach(rowData => {
+        const row = tbody.insertRow();
+
+        rowData.forEach((cellData, index) => {
+            const cell = row.insertCell();
+
+            if (index === 3) { // 특성 컬럼이면 otherNames 사용 X (표시 X)
+                cell.textContent = cellData;
+            } else {
+                cell.textContent = cellData;
+            }
+        });
+    });
+}
+
+// 검색 기능도 `otherNames`에서 검색되도록 변경
+function filterTable() {
+    const searchInput = document.getElementById('search-input');
+    const searchTerm = searchInput.value.toLowerCase();
+
+    filteredData = data.filter(row => {
+        return row.some((cell, index) => {
+            if (index === 3) { // 특성 컬럼이면 otherNames까지 검색
+                const otherNames = otherNamesData[cell] || [];
+                return cell.toLowerCase().includes(searchTerm) ||
+                       otherNames.some(other => other.toLowerCase().includes(searchTerm));
+            }
+            return String(cell).toLowerCase().includes(searchTerm);
+        });
+    });
+
+    displayPage(1);
+}
+
+// JSON 파일 불러온 후 테이블 표시
+loadOtherNames();
+
