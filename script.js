@@ -310,7 +310,7 @@ const data = [
 
 let filteredData = [...data]; // 필터링된 데이터를 저장할 배열
 
-const rowsPerPage = 30; // 한 페이지에 표시할 데이터 수
+const rowsPerPage = 20; // 한 페이지에 표시할 데이터 수
 let currentPage = 1; // 현재 페이지
 
 function filterTable() {
