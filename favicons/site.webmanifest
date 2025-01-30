@@ -25,14 +25,14 @@
       "src": "screenshots/screenshot1.png",
       "sizes": "640x480",
       "type": "image/png"
-  
     },
     {
       "src": "screenshots/Adobe Express - file.png",
       "sizes": "3840x3840",
       "form_factor": "wide",
       "type": "image/png"
-   
     }
-  ]
+  ],
+  "description": "FC모바일 특성 재료",
+  "lang": "ko"
 }
