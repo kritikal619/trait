@@ -296,3 +296,8 @@ width: 90%;
   width: 100px; /* 버튼 크기 고정 */
   text-align: center; /* 텍스트 가운데 정렬 */
 }
+    
+#navbar {
+  background: #73685d;
+  padding: 0.3rem 1rem;
+}
