@@ -301,3 +301,8 @@ width: 90%;
   background: #73685d;
   padding: 0.3rem 1rem;
 }
+
+body {
+  padding-top: 70px; /* 네비게이션 바의 높이에 맞게 조정 */
+}
+
